@@ -19,7 +19,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <Category></Category>
-      <Intro></Intro>
+      <Intro title={"Bistro Boss"} details={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nulla esse sit debitis molestiae eveniet iste temporibus ullam illo nihil."}></Intro>
       <PopularMenu></PopularMenu>
       <CallUs></CallUs>
       <Recommend></Recommend>
