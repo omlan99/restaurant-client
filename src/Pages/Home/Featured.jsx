@@ -10,7 +10,7 @@ const Featured = () => {
             subHeading={'Check It Out'}>
 
             </SectionTitle>
-            <div className='md:flex justify-center items-center bg-slate-500 bg-opacity-40 px-10 md:px-36 pt-12 pb-20 '>
+            <div className='md:flex justify-center items-center bg-slate-500 bg-opacity-40 px-10 lg:px-36 pt-12 pb-20 '>
                 <div>
                 <img src={featuredImg} alt="" />
                 </div>
