@@ -8,7 +8,7 @@ import Intro from "../../Component/Intro";
 import CallUs from "./CallUs";
 import Recommend from "./Recommend";
 import { Helmet } from "react-helmet-async";
-
+import introImg from '../../assets/home/chef-service.jpg'
 
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <Category></Category>
-      <Intro title={"Bistro Boss"} details={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nulla esse sit debitis molestiae eveniet iste temporibus ullam illo nihil."}></Intro>
+      <Intro title={"Bistro Boss"} details={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nulla esse sit debitis molestiae eveniet iste temporibus ullam illo nihil."} image={introImg}></Intro>
       <PopularMenu></PopularMenu>
       <CallUs></CallUs>
       <Recommend></Recommend>

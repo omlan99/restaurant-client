@@ -7,6 +7,7 @@ const useMenu = () => {
         fetch('menu.json')
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             setMenu(data)
             setLoading(false)
         })

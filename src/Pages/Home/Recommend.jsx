@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../Component/SectionTitle';
+import useMenu from '../../Hook/UseMenu';
 
 const Recommend = () => {
-    const [menus, setMenus] = useState([]);
-    useEffect(() =>{
-        fetch('menu.json')
-        .then(res => res.json())
-        .then(data => {
-            setMenus(data)
-        })
-    },[])
+    const [menu] = useMenu()
+    // const [menus, setMenus] = useState([]);
+    // useEffect(() =>{
+    //     fetch('menu.json')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setMenus(data)
+    //     })
+    // },[])
     return (
         <div>
             <SectionTitle subHeading={'Should Try'} heading={'chef recommends'}></SectionTitle>
             <div className='grid lg:grid-cols-3 gap-6 items-center justify-center'>
             {
-                menus.slice(0, 3).map(menu => <div className="card bg-base-100 max-w-[424px]">
+                menu.slice(0, 3).map(menu => <div className="card bg-base-100 max-w-[424px]">
                     <figure className=" pt-10">
                       <img
 
