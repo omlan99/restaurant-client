@@ -12,7 +12,7 @@ import saladsImg from "../../assets/menu/salad-bg.jpg";
 const Menu = () => {
   const [menu] = useMenu();
   const dessert = menu.filter((item) => item.category === "dessert");
-  const salads = menu.slice(0.6).filter((item) => item.category === "salad");
+  const salad = menu.slice(0.6).filter((item) => item.category === "salad");
   const pizza = menu.filter((item) => item.category === "pizza");
   const soups = menu.filter((item) => item.category === "soup");
   const offered = menu.filter((item) => item.category === "offered");
@@ -45,7 +45,7 @@ const Menu = () => {
         image={pizzaImg}
       ></MenuCategory>
       <MenuCategory
-        items={salads.slice(0, 8)}
+        items={salad.slice(0, 8)}
         title={"salads"}
         details={
           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, reiciendis!"
