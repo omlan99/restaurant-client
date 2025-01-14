@@ -1,5 +1,5 @@
 import React from 'react';
-import IntroImg from '../../assets/home/chef-service.jpg'
+
 import './Intro.css'
 const Intro = () => {
     return (

@@ -4,15 +4,19 @@ import Category from "./Category";
 import PopularMenu from "./PopularMenu";
 import Featured from "./Featured";
 import Testomonial from "./Testomonial";
-import Intro from "./Intro";
+import Intro from "../../Component/Intro";
 import CallUs from "./CallUs";
 import Recommend from "./Recommend";
+import { Helmet } from "react-helmet-async";
 
 
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Home</title>
+      </Helmet>
       <Banner></Banner>
       <Category></Category>
       <Intro></Intro>

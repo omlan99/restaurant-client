@@ -1,0 +1,7 @@
+.Intro-css{
+    background-image: url("../assets/home/chef-service.jpg");
+    background-position: center;
+    background-repeat: none;
+
+    background-size: cover;
+}
