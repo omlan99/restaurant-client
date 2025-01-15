@@ -5,7 +5,7 @@ import Navbar from '../Component/Navbar';
 
 const MainLayout = () => {
     const location = useLocation()
-    const hideHeaderFooter = location.pathname.includes('login')
+    const hideHeaderFooter = location.pathname.includes('login') || location.pathname.includes("signup")
     return (
         <div>
             {hideHeaderFooter || <Navbar></Navbar>}

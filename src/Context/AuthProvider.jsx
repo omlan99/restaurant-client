@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, updateProfile } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { createContext } from "react";
-import auth from '../../Firebase/Firebase.init';
+import auth from '../Firebase/firebase.init';
 
 export const AuthContext = createContext(null)
 const googleProvider = new GoogleAuthProvider();
@@ -28,7 +28,7 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
           console.log("User logged in ", loggedUser);
           setUser(loggedUser);
-          setLoading(false)
+          setLoader(false)
      
         });
         return () => {

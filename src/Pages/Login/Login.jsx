@@ -1,17 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { useForm } from "react-hook-form";
+import { AuthContext } from '../../Context/AuthProvider';
 const Login = () => {
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
+    const {signInUser} = useContext(AuthContext)
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        console.log(data)
+    };
+
     useEffect(() => {
         loadCaptchaEnginge(6)
     }, [])
-    const handleLogin = e => {
-        e.preventDefault()
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-    }
+
     const handleValidateCaptcha = () => {
         const user_captcha_value = captchaRef.current.value
         console.log(user_captcha_value)
@@ -34,18 +37,24 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-1/2 shrink-0 shadow-2xl">
-            <form className="card-body" onSubmit={handleLogin}>
+            <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input name='email' type="email" placeholder="email" className="input input-bordered"  />
+                <input {...register("email", { required: true })} name='email' type="email" placeholder="email" className="input input-bordered"  />
+                {errors.email?.type === 'required' && <p className='text-red-600'>Please Enter a email</p>}
+
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input name='password' type="password" placeholder="password" className="input input-bordered"  />
+                <input {...register("password", { required: true, minLength: 6,  pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/  })} name='password' type="password" placeholder="password" className="input input-bordered"  />
+                {errors.password?.type === 'required' && <p className='text-red-600'>Please Enter a password</p>}
+                {errors.password?.type === 'min' && <p className='text-red-600'>Please Enter at least 6 character </p>}
+                {errors.password?.type === 'pattern' && <p className='text-red-600'>Please Enter at least one uppercase and one lowercase and one special character </p>}
+
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                 </label>
@@ -54,7 +63,7 @@ const Login = () => {
                 <label className="label">
                   <LoadCanvasTemplate></LoadCanvasTemplate>
                 </label>
-                <input name='password' type="captcha" ref={captchaRef}  placeholder="type the captha" className="input input-bordered"  />
+                <input  type="captcha" ref={captchaRef}  placeholder="type the captha" className="input input-bordered"  />
                 <button className='btn btn-outline btn-xs mt-2' onClick={handleValidateCaptcha}>Validate</button>
               </div>
               <div className="form-control mt-6">
