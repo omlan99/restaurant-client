@@ -1,13 +1,19 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { data, Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../Context/AuthProvider";
 const SignUp = () => {
- 
+    const {createUser} = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = (data) =>{
         console.log(data)
+        createUser(data.email, data.password)
     }
+ 
   return (
+   <>
+         <Helmet><title>Bistro Boss | Sign Up</title></Helmet>
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
@@ -66,7 +72,7 @@ const SignUp = () => {
         <p className="mx-auto"><small>Already have an account? <Link to={'/login'}>Log In</Link></small></p>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

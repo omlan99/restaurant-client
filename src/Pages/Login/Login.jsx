@@ -3,19 +3,21 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider';
 import { Helmet } from 'react-helmet-async';
-import { data, Link } from 'react-router-dom';
+import { data, Link, useNavigate } from 'react-router-dom';
 const Login = () => {
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
     const {signInUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
+        signInUser(data.email, data.password)
+        .then(result => {
+           console.log(result.user)
+        })
+        navigate('/')
     };
-     signInUser(data.email, data.password)
-     .then(result => {
-        console.log(result.user)
-     })
 
     useEffect(() => {
         loadCaptchaEnginge(6)
@@ -33,8 +35,9 @@ const Login = () => {
     }
         
     return (
-        <div className="hero bg-base-200 min-h-screen">
+        <>
             <Helmet><title>Bistro Boss | Login</title></Helmet>
+                <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center w-1/2 lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
@@ -77,10 +80,11 @@ const Login = () => {
                 <input disabled={disabled} type="submit"  className="btn btn-primary" value={"Login"}/>
               </div>
             </form>
-          </div>
           <p><small>New here? <Link to={'/signup'}>Create an Account</Link></small></p>
+          </div>
         </div>
       </div>
+        </>
     );
 };
 
