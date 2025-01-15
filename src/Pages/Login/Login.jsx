@@ -3,12 +3,14 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider';
 import { Helmet } from 'react-helmet-async';
-import { data, Link, useNavigate } from 'react-router-dom';
+import { data, Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
     const {signInUser} = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    let form =location.state?.form?.pathname || '/'
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
@@ -16,7 +18,7 @@ const Login = () => {
         .then(result => {
            console.log(result.user)
         })
-        navigate('/')
+        navigate(from, {replace : true})
     };
 
     useEffect(() => {
