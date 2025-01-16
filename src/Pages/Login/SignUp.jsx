@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { data, Link, useLocation } from "react-router-dom";
+import { data, Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Context/AuthProvider";
 const SignUp = () => {
   const { createUser, updateUser } = useContext(AuthContext);
+  const navigate= useNavigate()
   const {
     register,
     handleSubmit,
@@ -15,18 +16,25 @@ const SignUp = () => {
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-    .then(() => {
-      updateUser(data.name , data.photoUrl)
-    .then(()=>{
-      console.log('user profile updataed', data.name , data.photoUrl)
-      reset()
-    })
-    .catch(error => console.log(error))
-    })
-    .catch(error => console.log(error))
-    
+      .then(() => {
+        updateUser(data.name, data.photoUrl)
+          .then(() => {
+            reset();
+            console.log("user profile updataed");
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate('/')
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
   };
- 
+
   return (
     <>
       <Helmet>
