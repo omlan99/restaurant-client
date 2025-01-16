@@ -35,8 +35,8 @@ const AuthProvider = ({children}) => {
           unsubscribe();
         };
       }, []);
-      const updateUser= (updateData) =>{
-        return updateProfile(auth.currentUser, updateData)
+      const updateUser= (name, photo) =>{
+        return updateProfile(auth.currentUser, {displayName: name , photoURL: photo})
       }
       const signOutUser = () => {
         setLoader(true)
