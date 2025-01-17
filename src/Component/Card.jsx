@@ -1,15 +1,18 @@
 import React from "react";
 import useAuth from "../Hook/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hook/useAxiosSecure";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Card = ({ item }) => {
   const { image, name, recipe, price, _id } = item;
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure()
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    const axiosSecure = useAxiosSecure()
+  const location = useLocation()  
+  const handleClick = food => {
+    console.log(food)
     if (user && user.email) {
       const cartItem = {
         menuId : _id,
@@ -17,12 +20,38 @@ const Card = ({ item }) => {
         name : user.displayName,
         image,
         price
-      }
+      }     
       console.log(cartItem)
-      axiosSecure('/carts', cart)
+      axiosSecure.post('/carts',cartItem)
+      .then(res => {
+        console.log(res.data)
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "added to your cart",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+
 
     } else {
-      navigate("/login");
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please Login to your account",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login"
+      }).then((result) => {
+        if (result.isConfirmed) {
+         
+          navigate("/login",{ state : {form : location}});
+        }
+      });
     }
   };
   return (
@@ -38,7 +67,7 @@ const Card = ({ item }) => {
         <p>{recipe}</p>
         <div className="card-actions">
           <button
-            onClick={handleClick}
+            onClick={() => handleClick(item)}
             className="btn btn-outline border-0 border-b-4 bg-slate-300 border-yellow-400 text-yellow-400 hover:text-yellow-400"
           >
             Add To Cart

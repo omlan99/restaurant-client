@@ -18,7 +18,7 @@ const Login = () => {
         .then(result => {
            console.log(result.user)
         })
-        navigate(from, {replace : true})
+        navigate(form, {replace : true})
     };
 
     useEffect(() => {
