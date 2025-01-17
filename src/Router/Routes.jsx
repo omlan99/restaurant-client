@@ -8,6 +8,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/Login/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
+import UserHome from "../Pages/Dashboard/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,12 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart></Cart>
+      },
+      {
+        path : 'home',
+        element : <UserHome></UserHome>
       }
+
     ]
   }
 ]);
