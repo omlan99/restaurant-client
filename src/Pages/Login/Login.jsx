@@ -81,7 +81,7 @@ const Login = () => {
                 <button className='btn btn-outline btn-xs mt-2' onClick={handleValidateCaptcha}>Validate</button>
               </div>
               <div className="form-control mt-6">
-                <input disabled={disabled} type="submit"  className="btn btn-primary" value={"Login"}/>
+                <input  type="submit"  className="btn btn-primary" value={"Login"}/>
               </div>
             </form>
           <p className="text-center py-4"><small>Don't have any account? <Link className="text-blue-400" to={'/signup'}>Create an Account</Link></small></p>
