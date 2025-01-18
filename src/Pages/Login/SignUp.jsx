@@ -6,6 +6,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import axios from "axios";
 import SocialLogin from "../../Component/SocialLogin";
+import Swal from "sweetalert2";
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUser } = useContext(AuthContext);
@@ -28,12 +29,12 @@ const SignUp = () => {
               email: data.email,
             };
             axiosPublic.post("/users", userInfo).then((res) => {
-              if (res.data.inserteId) {
+              if (res.data.insertedId) {
                 reset();
                 Swal.fire({
                   position: "top-center",
                   icon: "success",
-                  title: "Your work has been saved",
+                  title: "Your account creation was successful",
                   showConfirmButton: false,
                   timer: 1500,
                 });
