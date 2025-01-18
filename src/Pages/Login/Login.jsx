@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import { data, Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../Component/SocialLogin';
 const Login = () => {
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
@@ -35,7 +36,8 @@ const Login = () => {
             setDisabled(true)
         }
     }
-        
+
+         
     return (
         <>
             <Helmet><title>Bistro Boss | Login</title></Helmet>
@@ -82,7 +84,8 @@ const Login = () => {
                 <input disabled={disabled} type="submit"  className="btn btn-primary" value={"Login"}/>
               </div>
             </form>
-          <p><small>New here? <Link to={'/signup'}>Create an Account</Link></small></p>
+          <p className="text-center py-4"><small>Don't have any account? <Link className="text-blue-400" to={'/signup'}>Create an Account</Link></small></p>
+          <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

@@ -3,9 +3,13 @@ import { data, Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Context/AuthProvider";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import axios from "axios";
+import SocialLogin from "../../Component/SocialLogin";
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, updateUser } = useContext(AuthContext);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,16 +23,23 @@ const SignUp = () => {
       .then(() => {
         updateUser(data.name, data.photoUrl)
           .then(() => {
-            reset();
-            console.log("user profile updataed");
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.inserteId) {
+                reset();
+                Swal.fire({
+                  position: "top-center",
+                  icon: "success",
+                  title: "Your work has been saved",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
             });
-            navigate('/')
           })
           .catch((error) => console.log(error));
       })
@@ -132,11 +143,12 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p className="mx-auto">
+            <p className="text-center py-4">
               <small>
-                Already have an account? <Link to={"/login"}>Log In</Link>
+                Already have an account? <Link className="text-blue-500" to={"/login"}>Log In</Link>
               </small>
             </p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

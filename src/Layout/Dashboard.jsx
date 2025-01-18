@@ -1,6 +1,6 @@
 import React from "react";
-import { FaCalendar, FaCalendarCheck, FaHome, FaList, FaShoppingBag, FaShoppingCart, FaWallet } from "react-icons/fa";
-import { FaLetterboxd, FaSquareLetterboxd, FaStreetView } from "react-icons/fa6";
+import { FaCalendar, FaCalendarCheck, FaEnvelope, FaHome, FaList, FaShoppingBag, FaShoppingCart, FaWallet } from "react-icons/fa";
+import {  FaStreetView } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hook/useCart";
 
@@ -66,7 +66,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink to="" className ="uppercase">
-            <FaSquareLetterboxd></FaSquareLetterboxd>
+            <FaEnvelope></FaEnvelope>
                 Contact</NavLink>
           </li>
         </ul>
