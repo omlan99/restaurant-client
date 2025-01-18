@@ -26,35 +26,35 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider);
       };
 
-      useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-           console.log(loggedUser)
-          setUser(loggedUser);
-          if(loggedUser){
-            const userInfo = {
-              email : loggedUser.email
-            }
-            console.log(userInfo)
-            axiosPublic.post('/jwt',userInfo)
-            .then(res => {
-              console.log(res)
-              if(res.data){
-                localStorage.setItem('access-token', res.data)
+        useEffect(() => {
+          const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+            console.log(loggedUser)
+            setUser(loggedUser);
+            if(loggedUser){
+              const userInfo = {
+                email : loggedUser.email
               }
+              console.log(userInfo)
+              axiosPublic.post('/jwt',userInfo)
+              .then(res => {
+                console.log(res)
+                if(res.data){
+                  localStorage.setItem('access-token', res.data)
+                }
 
-            })
+              })
 
-          }
-          else{
-              localStorage.removeItem('access-token')
-          }
-          setLoader(false)
-     
-        });
-        return () => {
-          unsubscribe();
-        };
-      }, [axiosPublic]);
+            }
+            else{
+                localStorage.removeItem('access-token')
+            }
+            setLoader(false)
+      
+          });
+          return () => {
+            unsubscribe();
+          };
+        }, [axiosPublic]);
       const updateUser= (name, photo) =>{
         return updateProfile(auth.currentUser, {displayName: name , photoURL: photo})
       }
