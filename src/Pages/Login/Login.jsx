@@ -19,6 +19,7 @@ const Login = () => {
         .then(result => {
            console.log(result.user)
         })
+        .catch(error => console.log(error.message))
         navigate(form, {replace : true})
     };
 

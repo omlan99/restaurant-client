@@ -28,6 +28,7 @@ const AuthProvider = ({children}) => {
 
       useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+           console.log(loggedUser)
           setUser(loggedUser);
           if(loggedUser){
             const userInfo = {
@@ -38,11 +39,9 @@ const AuthProvider = ({children}) => {
             .then(res => {
               console.log(res)
               if(res.data){
-                localStorage.setItem('Item', "test")
                 localStorage.setItem('access-token', res.data)
-                console.log('set item on localstorage')
               }
-              
+
             })
 
           }
@@ -55,7 +54,7 @@ const AuthProvider = ({children}) => {
         return () => {
           unsubscribe();
         };
-      }, []);
+      }, [axiosPublic]);
       const updateUser= (name, photo) =>{
         return updateProfile(auth.currentUser, {displayName: name , photoURL: photo})
       }

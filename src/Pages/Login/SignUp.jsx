@@ -32,7 +32,7 @@ const SignUp = () => {
               if (res.data.insertedId) {
                 reset();
                 Swal.fire({
-                  position: "top-center",
+                  position: "top-end",
                   icon: "success",
                   title: "Your account creation was successful",
                   showConfirmButton: false,
