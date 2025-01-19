@@ -22,7 +22,7 @@ import UseAdmin from "../Hook/UseAdmin";
 const Dashboard = () => {
   const [cart] = useCart();
   // TODO : get isAdmin from the database
-  const isAdmin = UseAdmin()
+  const [isAdmin] = UseAdmin()
   console.log(isAdmin)
   return (
     <div className="drawer lg:drawer-open">
@@ -77,7 +77,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="" className="uppercase">
+                <NavLink to="/dashboard/payment" className="uppercase">
                   <FaCalendar></FaCalendar>
                   Reservation
                 </NavLink>

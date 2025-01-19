@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
               const userInfo = {
                 email : loggedUser.email
               }
-              console.log(userInfo)
+    
               axiosPublic.post('/jwt',userInfo)
               .then(res => {
                 console.log(res)
