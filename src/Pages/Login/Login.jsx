@@ -18,9 +18,9 @@ const Login = () => {
         signInUser(data.email, data.password)
         .then(result => {
            console.log(result.user)
+           navigate(form, {replace : true})
         })
         .catch(error => console.log(error.message))
-        navigate(form, {replace : true})
     };
 
     useEffect(() => {

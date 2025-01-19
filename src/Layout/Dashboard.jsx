@@ -17,11 +17,13 @@ import {
 import { FaStreetView } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../Hook/useCart";
+import UseAdmin from "../Hook/UseAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
   // TODO : get isAdmin from the database
-  const isAdmin =true
+  const isAdmin = UseAdmin()
+  console.log(isAdmin)
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -134,7 +136,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="drawer-content flex flex-col items-center p-10 ">
+      <div className="drawer-content   p-10 ">
         {/* Page content here */}
         <Outlet></Outlet>
       </div>
